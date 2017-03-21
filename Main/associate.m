@@ -26,12 +26,12 @@ for j = 1 : size(M, 2)
   S(:, :, j) = H(:, :, j)*sigma_bar*H(:, :, j)' + Q;
   nu(:, j) = z_i - z_hat(:, j);
   nu(2, j) = mod(nu(2, j) + pi, 2*pi) - pi;
-  P(j) = 1/sqrt(det(2*pi*S(:, :, j))) * exp((-1/2) * nu(:, j)' * inv(S(:, :, j)) * nu(:, j));
+  P(j) = 1/sqrt(det(2*pi*S(:, :, j)))*exp((-1/2)*nu(:, j)'*inv(S(:, :, j))*nu(:, j));
 end
 
 [P_max c] = max(P);
 
-DM = nu(:, c)' * inv(S(:, :, c)) * nu(:, c);
+DM = nu(:, c)'*inv(S(:, :, c))*nu(:, c);
 if DM > Lambda_m
   outlier = 1;
 else
